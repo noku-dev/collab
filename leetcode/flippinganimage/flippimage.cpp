@@ -6,11 +6,8 @@ public:
         // instead of a const. Although on the other hand the function signature
         // returns a vector, so perhaps the intention was not to modify the argument
         for (auto & row : A) {
-            auto n = row.size();
             // Reverse each row
-            for (auto i = 0 ; i < n/2 ; i++) {
-                swap(row[i], row[n - i - 1]);
-            }
+            reverse(row.begin(), row.end());
             // Flip each row
             // There might be a way to do it all in one loop, but this way, we
             // don't have to worry for swaps that don't touch the middle element,
