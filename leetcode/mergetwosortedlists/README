@@ -7,4 +7,28 @@ Example:
 Input: 1->2->4, 1->3->4
 Output: 1->1->2->3->4->4
 
-Slight variation of a solution I found using vector. 
+Slight variation of a solution I found using vector. There are other iterative solutions in which we can iterate over the lists, comparing the values in l1 and l2 and advancing the list that contributed the new value. For example:
+        ListNode* dummy = new ListNode(0);
+        ListNode* head = dummy;
+        ListNode* tail = dummy;
+        while (l1 != NULL && l2 != NULL) {
+            ListNode* tmp = new ListNode(-1);
+            if (l1->val > l2->val) {
+                tmp->val = l2->val;
+                l2 = l2->next;
+            }
+            else {
+                tmp->val = l1->val;
+                l1 = l1->next;
+            }
+            tail->next = tmp;
+            tail = tail->next;
+        }
+        if (l1 == NULL)
+            tail->next = l2;
+        if (l2 == NULL)
+            tail->next = l1;
+        head = head->next;
+        delete dummy;
+        return head;
+But this assumes lists are of the same length, and the code I submitted using vector can work with lists of different length.
