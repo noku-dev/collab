@@ -23,3 +23,10 @@ class Solution(object):
             if nums[x] <> nums[x+1]:
                 return nums[x]
         return nums[-1]    
+        """
+        # Their solution
+        a = 0
+        for i in nums:
+            a ^= i
+        return a
+        """
