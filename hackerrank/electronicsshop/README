@@ -1,0 +1,6 @@
+https://www.hackerrank.com/challenges/electronics-shop/problem
+
+Perhaps complexity can be reduced under some assumptions,
+for example if the prices are guaranteed to be increasing, then
+we could break as soon as either keyboard or USB drive are larger
+than budget
