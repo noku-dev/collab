@@ -1,0 +1,4 @@
+https://www.hackerrank.com/challenges/cats-and-a-mouse/problem
+
+Tricky thing here was to realize the cats can go left to right or
+right to left towards the mouse. Not clear from the description.
