@@ -13,18 +13,16 @@ vector<string> split_string(string);
 // this is, updating this if I find a number that is more frequent.
 int equalizeArray(vector<int> arr) {
     map<int,int> mp;
-    int mostrepeated = -1;
     int maxrepeated = -1;
     for (auto i : arr) {
         // Update the frequency of this number
         mp[i]++;
         if (mp[i] > maxrepeated) {
             // This is now the most repeated number
-            mostrepeated = i;
             maxrepeated = mp[i];
         }
     }
-    return arr.size() - mp[mostrepeated];
+    return arr.size() - maxrepeated;
 }
 
 int main()
