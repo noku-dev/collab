@@ -1,0 +1,4 @@
+input is array of values, 0 or 1.  Zero means safe, one means thunder.  Can jump 1 or 2 clouds.  Figure out the
+minimum number of jumps to get to the end.  Return that number.
+
+https://www.hackerrank.com/challenges/jumping-on-the-clouds/problem
