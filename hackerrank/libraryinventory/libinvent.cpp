@@ -8,19 +8,38 @@
 #include <iterator>
 using namespace std;
 
-struct book {
+struct Book {
     int book_id;
     int borrower_id;
     int bookshelf_num;
+    friend ostream& operator<< (ostream &out, const Book &book);
+    friend istream& operator>> (istream &in, Book &book);
 };
+
+ostream& operator<< (ostream &out, const Book &book) {
+  out << "Book id : " << book.book_id << " Borrower id : " <<
+  book.borrower_id << " Book shelf : " << book.bookshelf_num;
+  return out;
+}
+
+istream& operator>> (istream &in, Book &book) {
+  // New book doesn't have a borrower yet
+  book.borrower_id = 0;
+  in >> book.book_id >> book.bookshelf_num;
+  return in;
+}
+
 
 class Library {
 public:
   void add_book(const string book_title, int book_id, int bookshelf_num){
     library[book_title].push_back({book_id, 0, bookshelf_num});
   }
-  book borrow_book(const string book_title, int borrower_id) {
-    book borrowed_book = {-1,-1,-1};
+  void add_book(const string book_title, const Book &book){
+    library[book_title].push_back(book);
+  }
+  Book borrow_book(const string book_title, int borrower_id) {
+    Book borrowed_book = {-1,-1,-1};
     if (library.find(book_title) != library.end()) {
       // Title found, see if there is a book that can be borrowed.
       auto &book_list = library[book_title];
@@ -81,22 +100,20 @@ public:
     for (auto &book_title : library) {
       cout << "Title : " << book_title.first << endl;
       for (auto book_item : book_title.second) {
-        cout << "Book id : " << book_item.book_id << " Borrower id : " <<
-        book_item.borrower_id << " Book shelf : " << book_item.bookshelf_num <<
-        endl;
+        cout << book_item << endl;
       }
     }
     cout << endl;
   }
 private:
-  map<string,list<book>> library;
+  map<string,list<Book>> library;
 
 };
 
 int main() {
     /* Enter your code here. Read input from STDIN. Print output to STDOUT */
     Library lib;
-    book tmp;
+    Book tmp;
     lib.add_book("Hamlet", 1, 1);
     lib.add_book("Hamlet", 2, 1);
     lib.add_book("Othello", 3, 2);
@@ -113,5 +130,21 @@ int main() {
     lib.check_book_status(bkid);
     lib.print_library();
 
+    int num_book;
+    string book_title;
+    Book tmpbook;
+    while (true) {
+      cin >> book_title;
+      // Done capturing input when title is DONENOD123
+      if (book_title == "DONENOD123") {
+        break;
+      }
+      cin >> num_book;
+      for (int i = 0 ; i < num_book ; i++) {
+        cin >> tmpbook;
+        lib.add_book(book_title, tmpbook);
+      }
+    }
+    lib.print_library();
     return 0;
 }
