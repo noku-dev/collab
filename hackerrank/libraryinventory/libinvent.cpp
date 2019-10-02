@@ -113,25 +113,28 @@ private:
 int main() {
     /* Enter your code here. Read input from STDIN. Print output to STDOUT */
     Library lib;
-    Book tmp;
-    lib.add_book("Hamlet", 1, 1);
-    lib.add_book("Hamlet", 2, 1);
-    lib.add_book("Othello", 3, 2);
-    lib.add_book("Othello", 4, 1);
-    lib.add_book("Othello", 5, 2);
-    lib.print_library();
-    tmp = lib.borrow_book("Hamlet", 1000);
-    lib.print_library();
-    auto bkid = tmp.book_id;
-    tmp = lib.borrow_book("Hamlet", 1001);
-    lib.check_book_status("Hamlet", 2);
-    lib.print_library();
-    lib.return_book("Hamlet", bkid);
-    lib.check_book_status(bkid);
-    lib.print_library();
+    // Book tmp;
+    // lib.add_book("Hamlet", 1, 1);
+    // lib.add_book("Hamlet", 2, 1);
+    // lib.add_book("Othello", 3, 2);
+    // lib.add_book("Othello", 4, 1);
+    // lib.add_book("Othello", 5, 2);
+    // lib.print_library();
+    // tmp = lib.borrow_book("Hamlet", 1000);
+    // lib.print_library();
+    // auto bkid = tmp.book_id;
+    // tmp = lib.borrow_book("Hamlet", 1001);
+    // lib.check_book_status("Hamlet", 2);
+    // lib.print_library();
+    // lib.return_book("Hamlet", bkid);
+    // lib.check_book_status(bkid);
+    // lib.print_library();
 
+    // Populate library
     int num_book;
     string book_title;
+    int borrower_id;
+    int bkid;
     Book tmpbook;
     while (true) {
       cin >> book_title;
@@ -146,5 +149,55 @@ int main() {
       }
     }
     lib.print_library();
+    // Run commands
+    int command = 0;
+    cout << "Enter command from 1 to 3 ";
+    while (cin >> command) {
+      switch (command) {
+        case 1:
+        // Borrow
+        cout << "Enter title : ";
+        cin >> book_title;
+        cout << "Enter borrower id : ";
+        cin >> borrower_id;
+        cout << "Title to borrow : " << book_title << " Borrower ID : " <<
+        borrower_id << endl;
+        tmpbook = lib.borrow_book(book_title, borrower_id);
+        cout << "Borrowed book with id " << tmpbook.book_id << endl;
+        break;
+        case 2:
+        // Return
+        cout << "Enter title : ";
+        cin >> book_title;
+        cout << "Enter Book id : ";
+        cin >> bkid;
+        lib.return_book(book_title, bkid);
+        cout << "Returned book with id " << bkid << endl;
+        break;
+        case 3:
+        // Check
+        cout << "Enter Book id : ";
+        cin >> bkid;
+        lib.check_book_status(bkid);
+        default:
+        break;
+      }
+      lib.print_library();
+      cout << "Enter command from 1 to 3 ";
+    }
     return 0;
 }
+
+/*
+Hamlet 3
+1 1
+2 1
+3 2
+Othello 2
+4 2
+5 1
+Tempest 2
+6 1
+7 2
+DONENOD123
+*/
