@@ -1,6 +1,7 @@
 bool isValid(char * s){
     int i = 0;
-    for (int j = 0; j < strlen(s); j++) {
+    int len = strlen(s);
+    for (int j = 0; j < len; j++) {
         switch (s[j]) {
             case '(':
             case '{':
@@ -42,6 +43,8 @@ bool isValid(char * s){
                 // printf("default\n");
                 return false;
         }
+        if (i > len - j)
+            return false;
     }
     // printf("end, i is %d\n", i);
     
