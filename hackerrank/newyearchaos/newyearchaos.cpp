@@ -6,8 +6,30 @@ vector<string> split_string(string);
 
 // Complete the minimumBribes function below.
 void minimumBribes(vector<int> q) {
+    int count = 0;
+    for (int i = q.size() - 1 ; i >= 0 ; i--) {
+        // Array starts with 1 at index 0 in the array
+        // If value at index i is greater than index + 3 positions 
+        // it means we have moved more than 2 positions to the left
+        // e.g. q[0] should be 1, and at most could have value 3 if 3 had moved 2 
+        // positions to the left, os if q[0] is greater than (0 + 3) then it would
+        // be too chaotic
+        if (q[i] > (i + 3)) {
+            cout << "Too chaotic" << endl;
+            return;
+        }
+        // The max guarantees that we don't go into negative index
+        // We try to go 2 positions to the left of us and see if those are values
+        // that have moved (bribed) to the left of us, i.e. greater than the current
+        // value at q[i]
+        for (int j = max(0,q[i]-2); j < i ; j++) {
+            if (q[j] > q[i]) {
+                count++;
+            }
+        }
 
-
+    }
+    cout << count << endl;
 }
 
 int main()
