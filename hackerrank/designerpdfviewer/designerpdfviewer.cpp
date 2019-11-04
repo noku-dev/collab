@@ -14,7 +14,8 @@ int designerPdfViewer(vector<int> h, string word) {
             max = h[c - 'a'];
         }
     }
-    return (max * len);
+    area = max * len;
+    return (area);
 }
 
 int main()
