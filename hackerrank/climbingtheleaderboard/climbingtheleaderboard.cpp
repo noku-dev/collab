@@ -6,18 +6,31 @@ vector<string> split_string(string);
 
 // Complete the climbingLeaderboard function below.
 vector<int> climbingLeaderboard(vector<int> scores, vector<int> alice) {
-    vector<int> result;
-    set<int, greater<int>> s;
-
-    for (auto sc : scores) {
-        s.insert(sc);
+    int h_rank = 1;
+    for(int i=scores.size()-1;i>0;i--){
+        if(scores[i]<scores[i-1]){
+            h_rank++;
+        }
     }
-    for (auto al : alice) {
-        auto lb = s.lower_bound(al);
-        auto dist = distance(s.begin(),lb);
-        result.push_back(dist + 1);
+    h_rank++;
+    vector<int>ranks(alice.size());
+    int j = scores.size()-1;
+    for(int i=0;i<alice.size();i++){
+        while(alice[i]>=scores[j] ){
+            if(h_rank==1){
+                break;
+            }
+            if(scores[j]==scores[j-1]){
+                j--;
+            }
+            else{
+                j--;
+                h_rank--;
+            }
+        }
+        ranks[i] = h_rank;
     }
-    return result;
+    return ranks;
 }
 
 int main()
